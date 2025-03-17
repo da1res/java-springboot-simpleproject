@@ -38,7 +38,7 @@ public class UserService {
 
 	public List<UserDTO> getUsers(String name, String username){
 
-		List<User> usersList = null;
+		List<User> usersList;
 
 		if(name != null && username != null){
 			usersList = userRepository.findAllByNameContainingIgnoreCaseAndUsernameContainingIgnoreCase(name, username);
@@ -66,8 +66,7 @@ public class UserService {
 		Optional<User> userFound = userRepository.findById(id);
 
 		if(userFound.isPresent()){
-			UserDTO userDTO = userMapper.entityToDTO(userFound.get());;
-			return userDTO;
+			return userMapper.entityToDTO(userFound.get());
 		}else {
 			throw new NoSuchElementException("User with given id doesn't exist!");
 		}
